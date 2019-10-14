@@ -37,4 +37,12 @@ def crearUsuario(request):
         usuario.password = password
         usuario.save()
 
-        return HttpResponse(serializers.serialize("json", [usuario]))
+        return HttpResponse(serializers.serialize("json", usuario))
+
+
+@csrf_exempt
+def getPortafoliosPersona(self, nombre):
+    portafolios = Portafiolio.objects.all()
+    user = Persona.objects.get(nombre=nombre)
+    portafolios = Portafiolio.objects.filter(persona=user.id)
+    return HttpResponse(serializers.serialize("json", portafolios))

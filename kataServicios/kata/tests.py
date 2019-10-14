@@ -25,8 +25,6 @@ class KataTestCase(TestCase):
         persona = Persona.objects.create(nombre='hola', apellido='apellido', usuario='user', foto='foto',
                                          perfilProfesional='test', password='noPass')
         portafolios = Portafiolio.objects.create(nombrePortafolio='porta', esPublico=True, persona=persona)
-        imagen = Imagen.objects.create(titulo='porta', enlace='True', descripcion='persona', esPublica=True,
-                                       portafolio=portafolios, tipoDeArchivo='test')
-        response = self.client.get('/kata/elemntosPersona')
+        response = self.client.get('/kata/elemntosPersona/hola')
         current_data = json.loads(response.content)
-        self.assertEqual(current_data, imagen)
+        self.assertEqual(current_data[0]['fields']['nombrePortafolio'], 'porta')
