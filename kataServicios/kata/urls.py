@@ -6,5 +6,8 @@ from . import views
 
 urlpatterns = [
   path('kata/portafolio', views.index, name="portafiolio"),
-  path('kata/portafolioLista', views.portafolioLista, name="portafiolio")
+  path('kata/portafolioLista', views.portafolioLista, name="portafolioLista"),
+  path('kata/crearUsuario', views.crearUsuario, name="crearUsuario")
+
+
 ]

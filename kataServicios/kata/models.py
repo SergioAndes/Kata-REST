@@ -9,8 +9,7 @@ class Persona(models.Model):
     perfilProfesional = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.nombre
+
 
 class Portafiolio(models.Model):
     nombrePortafolio = models.CharField(max_length=200)
