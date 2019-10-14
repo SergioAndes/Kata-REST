@@ -1,6 +1,6 @@
 import requests
 from django.test import TestCase, Client
-from .models import Portafiolio, Persona
+from .models import Portafiolio, Persona, Imagen
 import json
 
 
@@ -21,10 +21,12 @@ class KataTestCase(TestCase):
         current_data = json.loads(response.content)
         self.assertEqual(len(current_data), 1)
 
-    def test_registro(self):
-        headerInfo = {'content-type': 'application/json'}
-        payload = {"nombre": "hola", "apellido": "apellido", "usuario": "user", "foto": "foto", "perfilProfesional": "test",
-             "password": "noPass"}
-        jLoad = json.dumps(payload)
-        fd = self.client.post('/kata/crearUsuario', headers=headerInfo, data=jLoad)
-        self.assertEqual(fd[0]['fields']['nombre'], 'hola')
+    def test_elementosPersona(self):
+        persona = Persona.objects.create(nombre='hola', apellido='apellido', usuario='user', foto='foto',
+                                         perfilProfesional='test', password='noPass')
+        portafolios = Portafiolio.objects.create(nombrePortafolio='porta', esPublico=True, persona=persona)
+        imagen = Imagen.objects.create(titulo='porta', enlace='True', descripcion='persona', esPublica=True,
+                                       portafolio=portafolios, tipoDeArchivo='test')
+        response = self.client.get('/kata/elemntosPersona')
+        current_data = json.loads(response.content)
+        self.assertEqual(current_data, imagen)
