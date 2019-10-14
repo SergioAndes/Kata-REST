@@ -18,3 +18,8 @@ class KataTestCase(TestCase):
         response=self.client.get('/kata/portafolioLista')
         current_data=json.loads(response.content)
         self.assertEqual(len(current_data), 1)
+
+    def test_registro(self):
+        response = self.client.post('/crearUsuario/',json.dumps({"nombre":"hola","apellido":"apellido","usuario":"user","foto":"foto","perfilProfesional":"test","password":"noPass"}))
+        curren_data=json.loads(response.content)
+        self.assertEqual(curren_data[0]['fiels']['nombre'],'user')
