@@ -8,7 +8,8 @@ urlpatterns = [
   path('kata/portafolio', views.index, name="portafiolio"),
   path('kata/portafolioLista', views.portafolioLista, name="portafolioLista"),
   path('kata/crearUsuario', views.crearUsuario, name="crearUsuario"),
-  path('kata/elemntosPersona/<str:nombre>', views.getPortafoliosPersona, name="iughb")
+  path('kata/elemntosPersona/<str:nombre>', views.getPortafoliosPersona, name="iughb"),
+  path('kata/log/<str:user>/<str:password>', views.login, name="jnkj")
 
 
 ]

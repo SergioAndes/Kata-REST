@@ -30,8 +30,8 @@ class KataTestCase(TestCase):
         self.assertEqual(current_data[0]['fields']['nombrePortafolio'], 'porta')
 
     def test_login(self):
-            headerInfo = {'content-type': 'application/json'}
-            payload = {"user": "hola", "password": "noPass"}
-            jLoad = json.dumps(payload)
-            fd = self.client.post('/kata/log', headers=headerInfo, data=jLoad)
-            self.assertEqual(fd[0]['fields']['nombre'], 'hola')
+        persona = Persona.objects.create(nombre='hola', apellido='apellido', usuario='user', foto='foto',
+                                         perfilProfesional='test', password='noPass')
+        response = self.client.get('/kata/log/user/noPass')
+        current_data = json.loads(response.content)
+        self.assertEqual(current_data[0]['fields']['usuario'], 'user')

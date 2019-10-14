@@ -46,3 +46,14 @@ def getPortafoliosPersona(self, nombre):
     user = Persona.objects.get(nombre=nombre)
     portafolios = Portafiolio.objects.filter(persona=user.id)
     return HttpResponse(serializers.serialize("json", portafolios))
+
+@csrf_exempt
+def login(self,user,password):
+
+    existe = Persona.objects.filter(usuario=user)
+
+    if(existe[0].password == password):
+
+        return  HttpResponse(serializers.serialize("json", existe))
+    else:
+        return HttpResponse(status=204)
