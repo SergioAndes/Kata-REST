@@ -5,4 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 import json
 
+
 # Create your views here.
+def index(request):
+    portafolios = []
+    return HttpResponse(serializers.serialize("json", portafolios))
