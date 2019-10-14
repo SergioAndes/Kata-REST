@@ -15,6 +15,6 @@ class KataTestCase(TestCase):
     def test_elementos_especificos(self):
         persona = Persona.objects.create(nombre='hola',apellido='apellido',usuario='user',foto='foto',perfilProfesional='test',password='noPass')
         portafolios = Portafiolio.objects.create(nombrePortafolio='porta',esPublico=True,persona=persona)
-        response=self.client.get('/kata/portafolio')
+        response=self.client.get('/kata/portafolioLista')
         current_data=json.loads(response.content)
-        self.assertEqual(len(current_data), 200)
+        self.assertEqual(len(current_data), 1)

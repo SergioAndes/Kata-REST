@@ -5,5 +5,6 @@ from django.conf.urls import include
 from . import views
 
 urlpatterns = [
-  path('kata/portafolio', views.index, name="portafiolio")
+  path('kata/portafolio', views.index, name="portafiolio"),
+  path('kata/portafolioLista', views.portafolioLista, name="portafiolio")
 ]
