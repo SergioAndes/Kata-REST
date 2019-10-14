@@ -1,4 +1,6 @@
 from django.test import TestCase, Client
+from .models import Portafiolio, Persona
+import json
 
 
 # Create your tests here.
@@ -10,3 +12,9 @@ class KataTestCase(TestCase):
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, 200)
 
+    def test_elementos_especificos(self):
+        persona = Persona.objects.create(nombre='hola',apellido='apellido',usuario='user',foto='foto',perfilProfesional='test',password='noPass')
+        portafolios = Portafiolio.objects.create(nombrePortafolio='porta',esPublico=True,persona=persona)
+        response=self.client.get('/kata/portafolio')
+        current_data=json.loads(response.content)
+        self.assertEqual(len(current_data), 200)
